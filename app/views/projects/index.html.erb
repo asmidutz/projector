@@ -1,0 +1,44 @@
+<%= "#{pluralize(@projects.count, "Project")}" %>
+<style>
+#projects {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#projects td, #projects th {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+}
+
+#projects tr:nth-child(even){background-color: #f2f2f2}
+
+#projects tr:hover {background-color: #ddd;}
+
+#projects th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #4CAF50;
+    color: white;
+}
+</style>
+<table id="projects">
+    <head>
+        <thead>
+            <tbody>
+                <% @projects.each do |p| %>
+                <tr>
+                    <td> <%= p.name %> </td>
+                    <td> <%= p.description %></td>
+                    <td> <%= p.start_date %></td>
+                    <td> <%= p.projected_end_date %></td>
+                    <td> <%= p.actual_end_date %></td>
+                    <td> <%= p.budget %></td>
+                    <td> <%= p.cost %>bundle </td>
+                    </tr>
+                        <% end %>
+            </tbody>
+        </thead>
+    </head>
+</table>
