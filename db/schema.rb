@@ -11,10 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160129033934) do
+ActiveRecord::Schema.define(version: 20160219022038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assignments", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "resource_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "assignments", ["project_id", "resource_id"], name: "index_assignments_on_project_id_and_resource_id", using: :btree
+
+  create_table "enablements", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "resource_id"
+    t.integer  "projects_id"
+    t.integer  "resources_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "enablements", ["projects_id"], name: "index_enablements_on_projects_id", using: :btree
+  add_index "enablements", ["resources_id"], name: "index_enablements_on_resources_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
@@ -28,4 +51,33 @@ ActiveRecord::Schema.define(version: 20160129033934) do
     t.datetime "updated_at"
   end
 
+  create_table "resources", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.integer  "project_id"
+    t.string   "name"
+    t.datetime "due_date"
+    t.integer  "projects_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tasks", ["projects_id"], name: "index_tasks_on_projects_id", using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_foreign_key "enablements", "projects"
+  add_foreign_key "enablements", "resources"
+  add_foreign_key "tasks", "projects"
 end

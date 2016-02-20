@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
-  resources :projects, only: [:index]
-  resources :templates, only: [:index]
-  #controller & Method
- root to: 'home#index'
+  get 'sign_in', to: 'sessions#new', as: 'sign_in'
+  post 'sign_in', to: 'sessions#create'
+  get 'sign_out', to: 'sessions#destroy'
+  get 'landing', to: 'pages#landing', as: 'landing'
+  resources :projects, only: [:index, :new, :create, :show, :edit, :update] do 
+    resources :tasks
+  end
+  resources :resources, only: [:index, :new, :create, :show, :edit, :update]
+  resources :templates, only: [:index, :new, :create, :show, :edit, :update]
+  resources :assignments, only: [:new, :create, :show, :edit, :update]
+  resources :users, only: [:index, :new, :create, :show, :edit, :update]
+
+  root to: 'home#index'
 end

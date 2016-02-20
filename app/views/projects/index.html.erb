@@ -1,44 +1,30 @@
-<%= "#{pluralize(@projects.count, "Project")}" %>
-<style>
-#projects {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
+<%= "#{pluralize(@projects.count, "project")}" %>
 
-#projects td, #projects th {
-    border: 1px solid #ddd;
-    text-align: left;
-    padding: 8px;
-}
-
-#projects tr:nth-child(even){background-color: #f2f2f2}
-
-#projects tr:hover {background-color: #ddd;}
-
-#projects th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    background-color: #4CAF50;
-    color: white;
-}
-</style>
-<table id="projects">
-    <head>
-        <thead>
-            <tbody>
-                <% @projects.each do |p| %>
-                <tr>
-                    <td> <%= p.name %> </td>
-                    <td> <%= p.description %></td>
-                    <td> <%= p.start_date %></td>
-                    <td> <%= p.projected_end_date %></td>
-                    <td> <%= p.actual_end_date %></td>
-                    <td> <%= p.budget %></td>
-                    <td> <%= p.cost %>bundle </td>
-                    </tr>
-                        <% end %>
-            </tbody>
-        </thead>
-    </head>
+<table>
+  <thead>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+      <td>Start Date</td>
+      <td>Projected End Date</td>
+      <td>Actual End Date</td>
+      <td>Budget</td>
+      <td>Cost</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= project.name %></td>
+        <td><%= project.description %></td>
+        <td><%= project.start_date %></td>
+        <td><%= project.projected_end_date %></td>
+        <td><%= project.actual_end_date %></td>
+        <td><%= project.budget %></td>
+        <td><%= project.cost %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
+
+<%= link_to('New Project', new_project_path) %>
