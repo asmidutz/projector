@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   
   def create
     warden.authenticate!
-    redirect_to root_url, notice "Logged in!"
+    redirect_to root_url, notice: "Logged in!"
   end
   
   def destroy

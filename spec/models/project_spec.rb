@@ -16,6 +16,9 @@ RSpec.describe Project, type: :model do
   it { is_expected.to have_db_column(:actual_end_date) }
   it { is_expected.to have_db_column(:budget) }
   it { is_expected.to have_db_column(:cost) }
+  
+  it { is_expected.to have_many(:assignments) }
+  it { is_expected.to have_many(:resources) }
 
   it { is_expected.to validate_presence_of(:name) }
 end

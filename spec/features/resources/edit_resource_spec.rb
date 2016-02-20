@@ -1,4 +1,3 @@
-
 require 'rails_helper'
 
 RSpec.feature 'Editing a resource', type: :feature do

@@ -7,6 +7,7 @@ RSpec.feature 'Listing all resources', type: :feature do
   end
   
   scenario 'returns a messsage when there are no resources to view' do
+    Resource.destroy_all
     visit '/'
     click_link 'Resources'
     
@@ -15,6 +16,7 @@ RSpec.feature 'Listing all resources', type: :feature do
   end
   
   scenario 'displays the resources' do 
+    Resource.destroy_all
     resource1 = Resource.create!(name: 'Test Resource 1', description: 'Testing purposes')
     resource2 = Resource.create!(name: 'Test Resource 2', description: 'Testing purposes')
     resource3 = Resource.create!(name: 'Test Resource 3', description: 'Testing purposes')
